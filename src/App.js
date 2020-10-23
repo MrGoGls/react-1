@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import Search from './Search.js';
+import Table from './Table.js';
 
     const list = [
       {
@@ -39,8 +41,6 @@ import './App.css';
         objectID: 5,
       },
     ];
-    const inSearched = searchTerm => item =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase());
     
 class App extends Component {
   constructor(props) {
@@ -85,38 +85,4 @@ class App extends Component {
   }
 }
 
-class Search extends Component {
-  render() {
-    const {value, onChange, children} = this.props;
-    return (
-      <form>
-        {children}
-        <input
-        type = "text"
-        value = {value}
-        onChange = {onChange}
-        />
-      </form>
-    )
-  }
-}
-
-class Table extends Component {
-  render () {
-    const {list, pattern, onDismiss} = this.props;
-    return (
-      <div>
-        {list.filter(inSearched(pattern)).map(item => 
-            <div key={item.objectID}>
-              <span>
-                <a href= {item.url}>{item.title}</a>
-              </span>
-              <span>{item.manufacturer}</span>
-              <span><button onClick = {() => onDismiss(item.objectID)} type="button">Удалить</button></span>
-            </div>
-        )}
-      </div>
-    )
-  }
-}
 export default App;
